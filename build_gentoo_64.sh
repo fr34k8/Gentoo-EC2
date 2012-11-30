@@ -117,7 +117,7 @@ boot_image=`ec2-describe-images \
 | awk '{ print $2 }'`
 
 # Added functionality for repeatability of process - check for duplicate AMI - 
-# Changed made by AlienOne
+# Changes made by AlienOne
 query_active_amis=`ec2-describe-instances --region $region | grep '^INSTANCE' | grep -v 'terminated' | awk '{ print $2 }' | wc -c`
 get_active_amis=`ec2-describe-instances --region $region | grep '^INSTANCE' | grep -v 'terminated' | awk '{ print $2 }'`
 
