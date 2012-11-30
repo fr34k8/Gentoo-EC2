@@ -4,7 +4,8 @@
 
 ###Modifications made to suit my requirements for building Gentoo server AMIs on Amazon EC2
 
-[Improved by rich0 on GitHub](http://github.com/rich0) 
+[Improved by rich0 on GitHub](http://github.com/rich0)
+ 
 [Origin edowd on BitBucket](https://bitbucket.org/edowd)
 
 
