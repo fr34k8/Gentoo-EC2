@@ -117,6 +117,6 @@ i386/remote_gentoo.sh
 x86_64/.config
 i386/.config
 ```
-#####The .config file for building the kernel.
+#####The .config file for building the Linux kernel.
 
 
