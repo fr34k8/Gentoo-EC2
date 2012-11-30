@@ -17,6 +17,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #-------------------------------------------------------------------------------
+# Modification Made by AlienOne 
+# Nov 30, 2012 1735PM EST
+# All modifications made by AlienOne reflected in comments below 
 
 outputdir=/tmp
 
@@ -49,6 +52,8 @@ fi
 
 if [[ $group == "" ]]; then
     echo "$building $start_time - `date +%Y-%m-%dT%H:%M:%S`: set up group"
+    # Added functionality for repete process if script is run over and over again
+    # Changes made by AlienOne
     group="gentoo-bootstrap"
     group_exists=`ec2-describe-group --region eu-west-1 | grep 'sg-' | grep -v 'default' | awk '{print $2}'| wc -c`
     del_group=`ec2-describe-group --region eu-west-1 | grep 'sg-' | grep -v 'default' | awk '{print $2}'`
@@ -59,6 +64,7 @@ if [[ $group == "" ]]; then
 	ec2-delete-group --region $region $del_group
 	ec2-create-group --region $region $group --description "Gentoo Bootstrap"
     fi
+    # End changes made by AlienOne
 
     ec2-authorize --region $region $group -P tcp -p 22 -s 0.0.0.0/0
 
@@ -67,6 +73,8 @@ fi
 
 if [[ $key == "" || $keyfile == "" ]]; then
     echo "$building $start_time - `date +%Y-%m-%dT%H:%M:%S`: set up key"
+    # Again I added functionality to deal with duplicate keys if script is repeated 
+    # Changes made by AlienOne
     key="gentoo-bootstrap_$region"
     keyfile="gentoo-bootstrap_$region.pem"
     query_key=`ec2-describe-keypairs --region eu-west-1 | grep 'gentoo' | awk '{print $2}' | wc -c`
@@ -78,6 +86,7 @@ if [[ $key == "" || $keyfile == "" ]]; then
 	ec2-delete-keypair --region $region $get_keyname
 	ec2-create-keypair --region $region $key > $keyfile
     fi
+    # End of changes made by AlienOne
 
     chmod 600 $keyfile
     echo "$building $start_time - `date +%Y-%m-%dT%H:%M:%S`: key set up"

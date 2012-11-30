@@ -116,9 +116,13 @@ boot_image=`ec2-describe-images \
 | tail -n 1 \
 | awk '{ print $2 }'`
 
+# Added functionality for repeatability of process - check for duplicate AMI - 
+# Changed made by AlienOne
 query_active_amis=`ec2-describe-instances --region $region | grep '^INSTANCE' | grep -v 'terminated' | awk '{ print $2 }' | wc -c`
 get_active_amis=`ec2-describe-instances --region $region | grep '^INSTANCE' | grep -v 'terminated' | awk '{ print $2 }'`
 
+# If duplicate AMI is found - delete duplicate AMI - else continue 
+# Changes made by AlienOne
 if [ $query_active_amis -eq 0 ]; then
 	echo "$building $start_time - `date +%Y-%m-%dT%H:%M:%S`: bootstrap image = $boot_image"
 	echo "$building $start_time - `date +%Y-%m-%dT%H:%M:%S`: starting bootstrap instance"
@@ -131,6 +135,7 @@ else
 	echo "$building $start_time - `date +%Y-%m-%dT%H:%M:%S`: bootstrap image = $boot_image"
         echo "$building $start_time - `date +%Y-%m-%dT%H:%M:%S`: starting bootstrap instance"
 fi
+# End Changes made by AlienOne
 
 spotreq=`ec2-request-spot-instances \
 --price .15 \
@@ -209,6 +214,8 @@ sleep 120
 
 echo "$building $start_time - `date +%Y-%m-%dT%H:%M:%S`: copying files to remote server"
 
+# Changes made regarding permissions and setup of following via SSH/SCP
+# Changes made by AlienOne
 ssh -o StrictHostKeyChecking=no -i $keyfile -t ec2-user@$server "sudo touch /tmp/plugin"
 ssh -o StrictHostKeyChecking=no -i $keyfile -t ec2-user@$server "sudo chown -R ec2-user:ec2-user /tmp/plugin"
 scp -o StrictHostKeyChecking=no -i $keyfile x86_64/* x86_64/.* ec2-user@$server:/tmp
@@ -218,6 +225,7 @@ echo "$building $start_time - `date +%Y-%m-%dT%H:%M:%S`: setting remote_gentoo.s
 
 ssh -o StrictHostKeyChecking=no -i $keyfile -t ec2-user@$server "sudo chmod 755 /tmp/remote_gentoo.sh /tmp/plugin"
 ssh -o StrictHostKeyChecking=no -i $keyfile -t ec2-user@$server "sudo /tmp/remote_gentoo.sh"
+# End of changes made by AlienOne
 
 echo "$building $start_time - `date +%Y-%m-%dT%H:%M:%S`: checking if install is done"
 
