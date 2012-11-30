@@ -119,4 +119,51 @@ i386/.config
 ```
 #####The .config file for building the Linux kernel.
 
+###HOWTO
 
+* Choose an Amazon EC2 Bootstrap Geographic Build Location -> South America - United Stated - Europe - Asia{Singapore/Japan}
+
+```
+> 
+date
+Fri Nov 30 18:37:37 EST 2012
+> 
+ec2-describe-regions | awk '{ print $2 }'
+eu-west-1
+sa-east-1
+us-east-1
+ap-northeast-1
+us-west-2
+us-west-1
+ap-southeast-1
+ap-southeast-2
+> 
+```
+
+* In this example we will build a Gentoo Linux Server AMI on an Amazon EC2 Bootstrap server in South East Asia Zone 1
+
+```
+date
+Fri Nov 30 18:54:43 EST 2012
+> 
+./setup_build_gentoo.sh ap-southeast-1
+Gentoo 2012-11-30T18:54:45 - 2012-11-30T18:54:45: set up group
+
+GROUP	sg-f41b1ea6	gentoo-bootstrap	Gentoo Bootstrap
+GROUP			gentoo-bootstrap		
+PERMISSION		gentoo-bootstrap	ALLOWS	tcp	22	22	FROM	CIDR	0.0.0.0/0	ingress
+Gentoo 2012-11-30T18:54:45 - 2012-11-30T18:55:10: group set up
+Gentoo 2012-11-30T18:54:45 - 2012-11-30T18:55:10: set up key
+Gentoo 2012-11-30T18:54:45 - 2012-11-30T18:55:30: key set up
+./build_gentoo_64.sh ap-southeast-1 gentoo-bootstrap gentoo-bootstrap_ap-southeast-1 gentoo-bootstrap_ap-southeast-1.pem
+./build_gentoo_32.sh ap-southeast-1 gentoo-bootstrap gentoo-bootstrap_ap-southeast-1 gentoo-bootstrap_ap-southeast-1.pem
+> 
+```
+
+* Finally execute the bootstrap script for the architecture you wish to deploy {32/64 bit}
+Note the build process can take from 20 minutes to 1 hour. This is to build an AMI image which is reusable for creating new 
+Amazon EC2 instances
+
+```
+./build_gentoo_64.sh ap-southeast-1 gentoo-bootstrap gentoo-bootstrap_ap-southeast-1 gentoo-bootstrap_ap-southeast-1.pem
+``` 

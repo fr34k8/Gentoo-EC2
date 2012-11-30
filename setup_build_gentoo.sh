@@ -55,9 +55,9 @@ if [[ $group == "" ]]; then
     # Added functionality for repete process if script is run over and over again
     # Changes made by AlienOne
     group="gentoo-bootstrap"
-    group_exists=`ec2-describe-group --region eu-west-1 | grep 'sg-' | grep -v 'default' | awk '{print $2}'| wc -c`
-    del_group=`ec2-describe-group --region eu-west-1 | grep 'sg-' | grep -v 'default' | awk '{print $2}'`
-
+    group_exists=`ec2-describe-group --region $region | grep 'sg-' | grep -v 'default' | awk '{print $2}'| wc -c`
+    del_group=`ec2-describe-group --region $region | grep 'sg-' | grep -v 'default' | awk '{print $2}'`
+    echo $group_exits
     if [ $group_exists -eq 0 ]; then
         ec2-create-group --region $region $group --description "Gentoo Bootstrap"
     else
@@ -77,8 +77,8 @@ if [[ $key == "" || $keyfile == "" ]]; then
     # Changes made by AlienOne
     key="gentoo-bootstrap_$region"
     keyfile="gentoo-bootstrap_$region.pem"
-    query_key=`ec2-describe-keypairs --region eu-west-1 | grep 'gentoo' | awk '{print $2}' | wc -c`
-    get_keyname=`ec2-describe-keypairs --region eu-west-1 | grep 'gentoo' | awk '{print $2}'`
+    query_key=`ec2-describe-keypairs --region $region | grep 'gentoo' | awk '{print $2}' | wc -c`
+    get_keyname=`ec2-describe-keypairs --region $region | grep 'gentoo' | awk '{print $2}'`
    
     if [  $query_key -eq 0 ]; then
         ec2-create-keypair --region $region $key > $keyfile
