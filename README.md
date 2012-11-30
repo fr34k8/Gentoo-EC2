@@ -1,8 +1,6 @@
 #Gentoo-EC2
 
-##Cloned From:
-
-###Modifications made to suit my requirements for building Gentoo server AMIs on Amazon EC2
+####Modifications made to suit my requirements for building Gentoo server AMIs on Amazon EC2
 
 [Improved by rich0 on GitHub](http://github.com/rich0)
  
