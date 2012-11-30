@@ -6,6 +6,31 @@
  
 [Origin edowd on BitBucket](https://bitbucket.org/edowd)
 
+#####Tool Requirements - Amazon EC2 API Tools - Java 6 current update 
+
+* [Download latest version Amazon EC2 API Tools](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/SettingUp_CommandLine.html)
+
+* [Setup Amazon EC2 API Tools](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/SettingUp_CommandLine.html)
+
+* [AWS Console Login Link](http://aws.amazon.com/console/)
+
+* Login AWS Console -> Go To -> Drop Down You User Account Name Upper Right Hand Corner AWS Console -> Security Credentials -> \
+Access Credentials -> X.509 Certificates -> Create New Certificate -> Download Private Key File -> Download X.509 Certificate 
+
+* Place your X.509 certificate and Private Key in a folder $PATH 
+
+* Add the following environment variables to your $SHELL $PATH
+```
+export JAVA_HOME=/usr
+export EC2_HOME="/home/alienone/aws-tools"
+export PATH=$PATH:$EC2_HOME/bin
+export EC2_CERT="/home/alienone/Downloads/YOUR_AMAZON_x509-CERTIFICATE"
+export EC2_PRIVATE_KEY="/home/alienone/Downloads/YOUR_AMAZON_x509_KEY"
+```
+* Reset your Bash $SHELL environment variable from a terminal/console 
+```
+. .bashrc
+```
 
 ```
 setup_build_gentoo.sh
