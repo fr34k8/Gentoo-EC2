@@ -24,8 +24,8 @@ Access Credentials -> X.509 Certificates -> Create New Certificate -> Download P
 export JAVA_HOME=/usr
 export EC2_HOME="/home/alienone/aws-tools"
 export PATH=$PATH:$EC2_HOME/bin
-export EC2_CERT="/home/alienone/Downloads/YOUR_AMAZON_x509-CERTIFICATE"
-export EC2_PRIVATE_KEY="/home/alienone/Downloads/YOUR_AMAZON_x509_KEY"
+export EC2_CERT="/home/alienone/Downloads/YOUR_AMAZON_x509-CERTIFICATE_FILE_NAME"
+export EC2_PRIVATE_KEY="/home/alienone/Downloads/YOUR_AMAZON_x509_KEY_FILE_NAME"
 ```
 * Reset your Bash $SHELL environment variable from a terminal/console 
 ```
