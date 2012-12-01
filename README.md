@@ -1,4 +1,4 @@
-#Gentoo-EC2
+#Gentoo-EC2 Automated Build Process on Amazon Elastic Block Store 
 
 ####Modifications made to suit my requirements for building Gentoo server AMIs on Amazon EC2
 
